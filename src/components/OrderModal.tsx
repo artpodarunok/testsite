@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { X, Upload, Check, ArrowRight, ArrowLeft, Image as ImageIcon } from 'lucide-react';
 import { Product, ProductFormat, supabase } from '../lib/supabase';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface OrderModalProps {
   isOpen: boolean;
@@ -12,6 +13,7 @@ interface OrderModalProps {
 type Step = 'upload' | 'select-product' | 'preview' | 'checkout' | 'success';
 
 export function OrderModal({ isOpen, onClose, selectedProduct, selectedFormat }: OrderModalProps) {
+  const { t } = useLanguage();
   const [step, setStep] = useState<Step>(selectedProduct ? 'upload' : 'upload');
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string>('');
@@ -40,12 +42,12 @@ export function OrderModal({ isOpen, onClose, selectedProduct, selectedFormat }:
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      alert('Будь ласка, оберіть файл зображення (JPG або PNG)');
+      alert(t('order.file-error'));
       return;
     }
 
     if (file.size > 10 * 1024 * 1024) {
-      alert('Розмір файлу не повинен перевищувати 10 МБ');
+      alert(t('order.file-size-error'));
       return;
     }
 

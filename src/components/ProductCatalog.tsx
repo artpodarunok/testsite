@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase, Product, ProductFormat } from '../lib/supabase';
 import { Check, ArrowRight } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface ProductWithFormats extends Product {
   formats?: ProductFormat[];
@@ -11,6 +12,7 @@ interface ProductCatalogProps {
 }
 
 export function ProductCatalog({ onSelectProduct }: ProductCatalogProps) {
+  const { t } = useLanguage();
   const [products, setProducts] = useState<ProductWithFormats[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -61,10 +63,10 @@ export function ProductCatalog({ onSelectProduct }: ProductCatalogProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Наші продукти
+            {t('catalog.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Оберіть ідеальний варіант для вашого подарунка
+            {t('catalog.subtitle')}
           </p>
         </div>
 
@@ -149,7 +151,7 @@ export function ProductCatalog({ onSelectProduct }: ProductCatalogProps) {
 
                 <div className="border-t pt-6">
                   <div className="text-sm font-semibold text-gray-500 mb-3">
-                    Доступні формати:
+                    {t('catalog.available-formats')}
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     {product.formats?.slice(0, 4).map((format) => (
@@ -170,7 +172,7 @@ export function ProductCatalog({ onSelectProduct }: ProductCatalogProps) {
                   {product.formats && product.formats.length > 4 && (
                     <div className="mt-3 text-center">
                       <button className="text-sm text-rose-600 hover:text-rose-700 font-medium inline-flex items-center">
-                        Показати всі формати
+                        {t('catalog.show-all-formats')}
                         <ArrowRight className="ml-1 h-4 w-4" />
                       </button>
                     </div>

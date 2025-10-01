@@ -8,6 +8,7 @@ import { FAQ } from './components/FAQ';
 import { Footer } from './components/Footer';
 import { OrderModal } from './components/OrderModal';
 import { Product, ProductFormat } from './lib/supabase';
+import { LanguageProvider } from './contexts/LanguageContext';
 
 function App() {
   const [isOrderModalOpen, setIsOrderModalOpen] = useState(false);
@@ -27,21 +28,23 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <Header />
-      <Hero onOrderClick={handleOrderClick} />
-      <HowItWorks />
-      <ProductCatalog onSelectProduct={handleSelectProduct} />
-      <Reviews />
-      <FAQ />
-      <Footer />
-      <OrderModal
-        isOpen={isOrderModalOpen}
-        onClose={() => setIsOrderModalOpen(false)}
-        selectedProduct={selectedProduct}
-        selectedFormat={selectedFormat}
-      />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen bg-white">
+        <Header />
+        <Hero onOrderClick={handleOrderClick} />
+        <HowItWorks />
+        <ProductCatalog onSelectProduct={handleSelectProduct} />
+        <Reviews />
+        <FAQ />
+        <Footer />
+        <OrderModal
+          isOpen={isOrderModalOpen}
+          onClose={() => setIsOrderModalOpen(false)}
+          selectedProduct={selectedProduct}
+          selectedFormat={selectedFormat}
+        />
+      </div>
+    </LanguageProvider>
   );
 }
 

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface FAQItem {
   question: string;
@@ -7,40 +8,41 @@ interface FAQItem {
 }
 
 export function FAQ() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs: FAQItem[] = [
     {
-      question: 'Скільки коштує доставка?',
-      answer: 'Доставка Новою Поштою оплачується отримувачем при отриманні посилки. Вартість залежить від міста призначення та ваги замовлення.',
+      question: t('faq.question1'),
+      answer: t('faq.answer1'),
     },
     {
-      question: 'Які вимоги до фото?',
-      answer: 'Фото має бути чітким, у високій роздільності (мінімум 1000x1000 пікселів). Підходять формати JPG та PNG. Обличчя на фото повинні бути добре освітлені та не розмиті.',
+      question: t('faq.question2'),
+      answer: t('faq.answer2'),
     },
     {
-      question: 'Скільки часу займає виготовлення?',
-      answer: 'Виготовлення займає 1-2 дні після підтвердження ескізу. Доставка Новою Поштою зазвичай займає 1-2 дні по Україні.',
+      question: t('faq.question3'),
+      answer: t('faq.answer3'),
     },
     {
-      question: 'Що таке безкоштовний ескіз?',
-      answer: 'Після оформлення замовлення ми створюємо макет вашої майбутньої картини та надсилаємо його вам на погодження перед виробництвом. Ви можете попросити внести корективи.',
+      question: t('faq.question4'),
+      answer: t('faq.answer4'),
     },
     {
-      question: 'Як оплатити замовлення?',
-      answer: 'Для підтвердження замовлення потрібна передоплата 170₴. Решту суми ви оплачуєте при отриманні товару в Новій Пошті. Передоплату можна зробити онлайн через LiqPay.',
+      question: t('faq.question5'),
+      answer: t('faq.answer5'),
     },
     {
-      question: 'Чи можна повернути товар?',
-      answer: 'Так, ви можете повернути товар протягом 14 днів, якщо він не підійшов. Товар має бути у вихідному стані та упаковці. Кошти повертаються протягом 5 робочих днів.',
+      question: t('faq.question6'),
+      answer: t('faq.answer6'),
     },
     {
-      question: 'Яка якість друку на полотні?',
-      answer: 'Ми використовуємо професійне обладнання та якісні чорнила, стійкі до вигорання. Друк виконується на натуральному полотні, натягнутому на дерев\'яний підрамник.',
+      question: t('faq.question7'),
+      answer: t('faq.answer7'),
     },
     {
-      question: 'Чи можна замовити нестандартний розмір?',
-      answer: 'Так, ми можемо виготовити картину або полотно нестандартного розміру. Зв\'яжіться з нами за телефоном або через форму зворотного зв\'язку для уточнення вартості.',
+      question: t('faq.question8'),
+      answer: t('faq.answer8'),
     },
   ];
 
@@ -49,10 +51,10 @@ export function FAQ() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Часті питання
+            {t('faq.title')}
           </h2>
           <p className="text-lg text-gray-600">
-            Знайдіть відповіді на найпопулярніші питання
+            {t('faq.subtitle')}
           </p>
         </div>
 

@@ -1,26 +1,29 @@
 import { Upload, Palette, CreditCard, Package } from 'lucide-react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function HowItWorks() {
+  const { t } = useLanguage();
+  
   const steps = [
     {
       icon: Upload,
-      title: 'Завантажте фото',
-      description: 'Оберіть якісне фото, яке хочете перетворити на картину або полотно',
+      titleKey: 'how-it-works.step1.title',
+      descriptionKey: 'how-it-works.step1.description',
     },
     {
       icon: Palette,
-      title: 'Виберіть формат',
-      description: 'Оберіть розмір та тип продукту з нашого каталогу',
+      titleKey: 'how-it-works.step2.title',
+      descriptionKey: 'how-it-works.step2.description',
     },
     {
       icon: CreditCard,
-      title: 'Оплатіть передоплату',
-      description: 'Внесіть передоплату 170₴, решту оплатіть при отриманні',
+      titleKey: 'how-it-works.step3.title',
+      descriptionKey: 'how-it-works.step3.description',
     },
     {
       icon: Package,
-      title: 'Отримайте замовлення',
-      description: 'Доставка Новою Поштою протягом 1-3 днів по всій Україні',
+      titleKey: 'how-it-works.step4.title',
+      descriptionKey: 'how-it-works.step4.description',
     },
   ];
 
@@ -29,10 +32,10 @@ export function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Як це працює?
+            {t('how-it-works.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Всього 4 простих кроки до вашого унікального подарунка
+            {t('how-it-works.subtitle')}
           </p>
         </div>
 
@@ -50,10 +53,10 @@ export function HowItWorks() {
                     {index + 1}
                   </div>
                   <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                    {step.title}
+                    {t(step.titleKey)}
                   </h3>
                   <p className="text-gray-600">
-                    {step.description}
+                    {t(step.descriptionKey)}
                   </p>
                 </div>
               </div>
@@ -65,10 +68,10 @@ export function HowItWorks() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex-1">
               <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                Безкоштовний ескіз перед виробництвом!
+                {t('how-it-works.bonus.title')}
               </h3>
               <p className="text-gray-600">
-                Ми надішлемо вам макет майбутньої картини для підтвердження перед початком роботи
+                {t('how-it-works.bonus.description')}
               </p>
             </div>
             <div className="flex-shrink-0">

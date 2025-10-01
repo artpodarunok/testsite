@@ -1,8 +1,11 @@
-import { ShoppingBag, Phone, Menu, X } from 'lucide-react';
+import { ShoppingBag, Phone, Menu, X, Globe } from 'lucide-react';
 import { useState } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [languageMenuOpen, setLanguageMenuOpen] = useState(false);
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <header className="bg-white shadow-sm sticky top-0 z-50">
@@ -15,26 +18,63 @@ export function Header() {
 
           <nav className="hidden md:flex space-x-8">
             <a href="#home" className="text-gray-700 hover:text-rose-600 transition-colors">
-              Головна
+              {t('nav.home')}
             </a>
             <a href="#catalog" className="text-gray-700 hover:text-rose-600 transition-colors">
-              Каталог
+              {t('nav.catalog')}
             </a>
             <a href="#how-it-works" className="text-gray-700 hover:text-rose-600 transition-colors">
-              Як замовити
+              {t('nav.how-it-works')}
             </a>
             <a href="#reviews" className="text-gray-700 hover:text-rose-600 transition-colors">
-              Відгуки
+              {t('nav.reviews')}
             </a>
             <a href="#faq" className="text-gray-700 hover:text-rose-600 transition-colors">
-              FAQ
+              {t('nav.faq')}
             </a>
           </nav>
 
           <div className="hidden md:flex items-center space-x-4">
+            {/* Language Switcher */}
+            <div className="relative">
+              <button
+                onClick={() => setLanguageMenuOpen(!languageMenuOpen)}
+                className="flex items-center text-gray-700 hover:text-rose-600 transition-colors"
+              >
+                <Globe className="h-5 w-5 mr-1" />
+                <span className="font-semibold">{language.toUpperCase()}</span>
+              </button>
+              {languageMenuOpen && (
+                <div className="absolute right-0 mt-2 w-20 bg-white rounded-md shadow-lg py-1 z-50">
+                  <button
+                    onClick={() => {
+                      setLanguage('uk');
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
+                      language === 'uk' ? 'text-rose-600 font-semibold' : 'text-gray-700'
+                    }`}
+                  >
+                    UK
+                  </button>
+                  <button
+                    onClick={() => {
+                      setLanguage('ru');
+                      setLanguageMenuOpen(false);
+                    }}
+                    className={`block w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
+                      language === 'ru' ? 'text-rose-600 font-semibold' : 'text-gray-700'
+                    }`}
+                  >
+                    RU
+                  </button>
+                </div>
+              )}
+            </div>
+            
             <a href="tel:+380123456789" className="flex items-center text-gray-700 hover:text-rose-600 transition-colors">
               <Phone className="h-5 w-5 mr-2" />
-              <span className="font-semibold">+380 12 345 67 89</span>
+              <span className="font-semibold">{t('header.phone')}</span>
             </a>
           </div>
 
@@ -59,42 +99,70 @@ export function Header() {
               className="block text-gray-700 hover:text-rose-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Головна
+              {t('nav.home')}
             </a>
             <a
               href="#catalog"
               className="block text-gray-700 hover:text-rose-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Каталог
+              {t('nav.catalog')}
             </a>
             <a
               href="#how-it-works"
               className="block text-gray-700 hover:text-rose-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Як замовити
+              {t('nav.how-it-works')}
             </a>
             <a
               href="#reviews"
               className="block text-gray-700 hover:text-rose-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Відгуки
+              {t('nav.reviews')}
             </a>
             <a
               href="#faq"
               className="block text-gray-700 hover:text-rose-600 transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
-              FAQ
+              {t('nav.faq')}
             </a>
+            
+            {/* Mobile Language Switcher */}
+            <div className="flex items-center space-x-4 pt-2 border-t">
+              <span className="text-sm text-gray-500">Мова:</span>
+              <button
+                onClick={() => {
+                  setLanguage('uk');
+                  setMobileMenuOpen(false);
+                }}
+                className={`px-3 py-1 text-sm rounded ${
+                  language === 'uk' ? 'bg-rose-600 text-white' : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                UK
+              </button>
+              <button
+                onClick={() => {
+                  setLanguage('ru');
+                  setMobileMenuOpen(false);
+                }}
+                className={`px-3 py-1 text-sm rounded ${
+                  language === 'ru' ? 'bg-rose-600 text-white' : 'bg-gray-200 text-gray-700'
+                }`}
+              >
+                RU
+              </button>
+            </div>
+            
             <a
               href="tel:+380123456789"
               className="flex items-center text-rose-600 font-semibold"
             >
               <Phone className="h-5 w-5 mr-2" />
-              +380 12 345 67 89
+              {t('header.phone')}
             </a>
           </nav>
         </div>

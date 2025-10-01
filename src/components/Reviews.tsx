@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { Star } from 'lucide-react';
 import { supabase, Review } from '../lib/supabase';
+import { useLanguage } from '../contexts/LanguageContext';
 
 export function Reviews() {
+  const { t } = useLanguage();
   const [reviews, setReviews] = useState<Review[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -37,10 +39,10 @@ export function Reviews() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Відгуки наших клієнтів
+            {t('reviews.title')}
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Щастя наших клієнтів - найкраща нагорода для нас
+            {t('reviews.subtitle')}
           </p>
         </div>
 
